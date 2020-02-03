@@ -1,0 +1,32 @@
+<h1 class="concert-title">All my organisations</h1>
+<div class="index-organisations">
+  <% @organisations.each do |organisation|%>
+    <ul>
+  <div class="box">
+      <li><h2> <%= organisation.name %></h2></li>
+      <li><%= organisation.presentation %></li>
+      <li><%= organisation.facebook_link %></li>
+      <li><%= organisation.tripadvisor_link %></li>
+      <li><%= organisation.google_link %></li>
+      <li><%= organisation.yelp_link %></li>
+      <%= link_to "View organisation details", organisation_path(organisation)%>
+    </ul>
+  <% end %>
+  </div>
+</div>
+<div>
+  <%= simple_form_for @organisation do |f| %>
+    <% if @organisation.errors.any? %>
+      <p class="text-danger"><%= @invitation.errors[:invitation].first  %></p>
+    <% end %>
+    <div class=" form-inputs col-auto">
+      <%= f.input :name, required: true, as: :string, label:"Name" %>
+    </div>
+    <div class=" form-inputs col-auto">
+      <%= f.input :presentation, required: true, as: :string, label:"Presentation" %>
+    </div>
+    <div class="form-actions col-auto">
+      <%= f.button :submit, "Create new organisation", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>
