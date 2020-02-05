@@ -25,7 +25,7 @@ class OrganisationsController < ApplicationController
     # authorize @organisation
     raise unless @organisation.save
 
-    redirect_to organisation_path(@organisation)
+    redirect_to organisations_path
   end
 
   def edit
