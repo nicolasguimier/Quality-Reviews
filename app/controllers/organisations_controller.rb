@@ -1,38 +1,51 @@
 class OrganisationsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
   def index
     @organisations = current_user.organisations
+    # @organisations = policy_scope(Organisation)
   end
 
   def show
     @organisation = Organisation.find(params[:id])
+    render layout: 'organisation'
   end
 
   def new
     @organisation = Organisation.new
+    # authorize @organisation
   end
 
   def create
     @organisation = Organisation.new(organisation_params)
     @organisation.user = current_user
-    if @organisation.save
-      redirect_to organisation_path(@organisation)
-    else
-      raise
-    end
+    # authorize @organisation
+    raise unless @organisation.save
+
+    redirect_to organisation_path(@organisation)
   end
 
   def edit
     @organisation = Organisation.find(params[:id])
+    raise unless @organisation.user == current_user
   end
 
   def update
-    @organisation = Organisation.find(params[:id])
-    @organisation.update(organisation_params)
-    redirect_to organisation_path(@organisation)
+    # @organisation = Organisation.find(params[:id])
+    @organisation = current_user.organisations.find(params[:id])
+    # authorize @organisation
+    raise unless @organisation.user == current_user
+
+    if organisation.update(organisation_params)
+      redirect_to @organisation
+    else
+      render :edit
+    end
   end
 
   def destroy
     @organisation = Organisation.find(params[:id])
+    raise unless @organisation.user == current_user
+
     @organisation.destroy
     redirect_to organisations_path
   end

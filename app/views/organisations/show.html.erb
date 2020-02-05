@@ -1,4 +1,4 @@
-<h1 class="concert-title"><%= @organisation.name %></h1>
+<h1><%= @organisation.name %></h1>
 <div class="box">
   <p><%= @organisation.presentation %></p>
   <p><%= @organisation.facebook_link %></p>
@@ -6,17 +6,12 @@
   <p><%= @organisation.google_link %></p>
   <p><%= @organisation.yelp_link %></p>
 </div>
-<p>
-  <%= link_to "Edit", edit_organisation_path(@organisation) %>
-</p>
 
-<p>
-<%= link_to "Back to the list", organisations_path %>
-</p>
-<p>
+<%# if policy(@organisation).update? %>
+<% if @organisation.user == current_user %>
+  <p><%#= link_to 'Edit', edit_organisation_path(@organisation) %></p>
 
-<%= link_to "Delete", organisation_path(@organisation),
-      method: :delete,
-      data: { confirm: "Are you sure?" } %>
-</p>
+<%# if policy(@organisation).destroy? %>
+  <p><%#= link_to 'Destroy', @organisation, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<% end %>
 
