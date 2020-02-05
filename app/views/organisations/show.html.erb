@@ -1,17 +1,30 @@
-<h1><%= @organisation.name %></h1>
-<div class="box">
-  <p><%= @organisation.presentation %></p>
-  <p><%= @organisation.facebook_link %></p>
-  <p><%= @organisation.tripadvisor_link %></p>
-  <p><%= @organisation.google_link %></p>
-  <p><%= @organisation.yelp_link %></p>
+<div class="qr-card">
+  <h1><%= @organisation.name %></h1>
+  <div>
+    <p><%= @organisation.presentation %></p>
+  </div>
+  <h2>Let a review on your favorite plateform:</h2>
+  <div class="d-flex flex-wrap justify-content-around">
+    <% if @organisation.facebook_link.present? %>
+      <%= link_to @facebook_link do %>
+        <%= image_tag "facebook-avis.jpeg" %>
+      <% end %>
+    <% end %>
+    <% if @organisation.tripadvisor_link.present? %>
+      <%= link_to @organisation.tripadvisor_link do %>
+        <%= image_tag "tripadvisor-avis.jpeg" %>
+      <% end %>
+    <% end %>
+    <% if @organisation.google_link.present? %>
+      <% google_link = "https://search.google.com/local/writereview?placeid=" + @organisation.google_link %>
+      <%= link_to google_link do %>
+        <%= image_tag "google-avis.jpeg" %>
+      <% end %>
+    <% end %>
+    <% if @organisation.yelp_link.present? %>
+      <%= link_to @organisation.yelp_link do %>
+        <%= image_tag "yelp-avis.jpeg" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-
-<%# if policy(@organisation).update? %>
-<% if @organisation.user == current_user %>
-  <p><%#= link_to 'Edit', edit_organisation_path(@organisation) %></p>
-
-<%# if policy(@organisation).destroy? %>
-  <p><%#= link_to 'Destroy', @organisation, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-<% end %>
-

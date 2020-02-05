@@ -7,6 +7,10 @@ class OrganisationsController < ApplicationController
 
   def show
     @organisation = Organisation.find(params[:id])
+    if @organisation.facebook_link.present?
+      @facebook_link = convert_facebook_link(@organisation.facebook_link)
+    end
+
     render layout: 'organisation'
   end
 
@@ -35,8 +39,8 @@ class OrganisationsController < ApplicationController
     # authorize @organisation
     raise unless @organisation.user == current_user
 
-    if organisation.update(organisation_params)
-      redirect_to @organisation
+    if @organisation.update(organisation_params)
+      redirect_to organisations_path
     else
       render :edit
     end
@@ -54,5 +58,12 @@ class OrganisationsController < ApplicationController
 
   def organisation_params
     params.require(:organisation).permit(:name, :presentation, :facebook_link, :tripadvisor_link, :google_link, :yelp_link)
+  end
+
+  def convert_facebook_link(bf_link)
+    bf_link.gsub! ':', '%3A'
+    bf_link.gsub! '/', '%2F'
+    new_link = "https://www.facebook.com/login/?next=" + bf_link
+    return new_link
   end
 end

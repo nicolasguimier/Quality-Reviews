@@ -1,7 +1,7 @@
 <h1 class="concert-title">All my organisations</h1>
 <div class="index-organisations">
   <% @organisations.each do |organisation|%>
-  <div class="organisation-card">
+  <div class="qr-card">
     <div class="card-left">
       <h2> <%= organisation.name %></h2>
       <p><%= organisation.presentation %></p>
@@ -24,7 +24,7 @@
     </div>
     <div class="card-right">
       <%= link_to "Edit", edit_organisation_path(organisation) %><br>
-      <%= link_to "View", organisation_path(organisation), class: "btn btn-primary"%><br>
+      <%= link_to "View", organisation_path(organisation), class: "btn btn-primary", target: "_blank" %><br>
       <%= link_to "Delete", organisation_path(organisation),
       method: :delete,
       class: "text-danger",
