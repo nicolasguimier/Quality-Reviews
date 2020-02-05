@@ -6,3 +6,17 @@
   <p><%= @organisation.google_link %></p>
   <p><%= @organisation.yelp_link %></p>
 </div>
+<p>
+  <%= link_to "Edit", edit_organisation_path(@organisation) %>
+</p>
+
+<p>
+<%= link_to "Back to the list", organisations_path %>
+</p>
+<p>
+
+<%= link_to "Delete", organisation_path(@organisation),
+      method: :delete,
+      data: { confirm: "Are you sure?" } %>
+</p>
+

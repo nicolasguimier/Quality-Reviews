@@ -1,11 +1,14 @@
 class OrganisationsController < ApplicationController
   def index
     @organisations = current_user.organisations
-    @organisation = Organisation.new
   end
 
   def show
     @organisation = Organisation.find(params[:id])
+  end
+
+  def new
+    @organisation = Organisation.new
   end
 
   def create
@@ -18,7 +21,20 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  def edit
+    @organisation = Organisation.find(params[:id])
+  end
+
+  def update
+    @organisation = Organisation.find(params[:id])
+    @organisation.update(organisation_params)
+    redirect_to organisation_path(@organisation)
+  end
+
   def destroy
+    @organisation = Organisation.find(params[:id])
+    @organisation.destroy
+    redirect_to organisations_path
   end
 
   private

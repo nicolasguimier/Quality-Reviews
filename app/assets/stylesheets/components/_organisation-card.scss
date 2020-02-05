@@ -1,0 +1,13 @@
+.organisation-card {
+  display: flex;
+  align-items: center;
+  .card-left{
+    width:: 300px;
+  }
+  .card-center{
+    flex-grow: 1;
+  }
+  .card-right{
+    flex-shrink: 1;
+  }
+}

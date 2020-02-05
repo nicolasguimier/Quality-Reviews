@@ -1,32 +1,39 @@
 <h1 class="concert-title">All my organisations</h1>
 <div class="index-organisations">
   <% @organisations.each do |organisation|%>
-    <ul>
-  <div class="box">
-      <li><h2> <%= organisation.name %></h2></li>
-      <li><%= organisation.presentation %></li>
-      <li><%= organisation.facebook_link %></li>
-      <li><%= organisation.tripadvisor_link %></li>
-      <li><%= organisation.google_link %></li>
-      <li><%= organisation.yelp_link %></li>
-      <%= link_to "View organisation details", organisation_path(organisation)%>
-    </ul>
-  <% end %>
+  <div class="organisation-card">
+    <div class="card-left">
+      <h2> <%= organisation.name %></h2>
+      <p><%= organisation.presentation %></p>
+    </div>
+    <div class="card-center">
+      <% if organisation.facebook_link.present? %>
+        <%= image_tag "facebook-avis.jpeg" %>
+      <%#= organisation.facebook_link %>
+      <%#= link_to image_tag("image.png", :alt => "Image Description", :class => "css"), root_path %>
+      <% end %>
+      <% if organisation.tripadvisor_link.present? %>
+        <%= image_tag "tripadvisor-avis.jpeg" %>
+      <% end %>
+      <% if organisation.google_link.present? %>
+        <%= image_tag "google-avis.jpeg" %>
+      <% end %>
+      <% if organisation.yelp_link.present? %>
+        <%= image_tag "yelp-avis.jpeg" %>
+      <% end %>
+    </div>
+    <div class="card-right">
+      <%= link_to "Edit", edit_organisation_path(organisation) %>
+      <%= link_to "View", organisation_path(organisation), class: "btn btn-primary"%>
+      <%= link_to "Delete", organisation_path(organisation),
+      method: :delete,
+      class: "text-danger",
+      data: { confirm: "Are you sure?" } %>
+    </div>
   </div>
+  <% end %>
 </div>
 <div>
-  <%= simple_form_for @organisation do |f| %>
-    <% if @organisation.errors.any? %>
-      <p class="text-danger"><%= @invitation.errors[:invitation].first  %></p>
-    <% end %>
-    <div class=" form-inputs col-auto">
-      <%= f.input :name, required: true, as: :string, label:"Name" %>
-    </div>
-    <div class=" form-inputs col-auto">
-      <%= f.input :presentation, required: true, as: :string, label:"Presentation" %>
-    </div>
-    <div class="form-actions col-auto">
-      <%= f.button :submit, "Create new organisation", class: "btn-primary" %>
-    </div>
-  <% end %>
+  <h2>New organisation ?</h2>
+  <%= link_to "Create new one", new_organisation_path, class: "btn btn-primary"%>
 </div>
