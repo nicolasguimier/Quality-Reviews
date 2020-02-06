@@ -9,6 +9,7 @@ gem 'puma'
 gem 'rails', '5.2.4'
 gem 'redis'
 
+gem 'friendly_id', '~> 5.2.4'
 gem 'pundit'
 
 gem 'autoprefixer-rails'

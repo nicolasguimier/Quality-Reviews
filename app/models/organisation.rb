@@ -1,6 +1,21 @@
 class Organisation < ApplicationRecord
   belongs_to :user
-  validates_uniqueness_of :name
+
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
+  # in case of 2 same name, the module will genrate a slug with Organisation ID.
+  def slug_candidates
+    random_number1 = rand(10)
+    random_number2 = rand(10)
+    random_number3 = rand(10)
+    [
+      :name,
+      [:name, random_number1],
+      [:name, random_number1, random_number2],
+      [:name, random_number1, random_number2, random_number3]
+    ]
+  end
 
   # this will generate friendly urls
   # def to_param

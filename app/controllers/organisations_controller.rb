@@ -1,12 +1,12 @@
 class OrganisationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
   def index
-    @organisations = current_user.organisations
+    @organisations = current_user.organisations.order(:id)
     # @organisations = policy_scope(Organisation)
   end
 
   def show
-    @organisation = Organisation.find(params[:id])
+    @organisation = Organisation.friendly.find(params[:id])
     if @organisation.facebook_link.present?
       @facebook_link = convert_facebook_link(@organisation.facebook_link)
     end
@@ -29,13 +29,13 @@ class OrganisationsController < ApplicationController
   end
 
   def edit
-    @organisation = Organisation.find(params[:id])
+    @organisation = Organisation.friendly.find(params[:id])
     raise unless @organisation.user == current_user
   end
 
   def update
     # @organisation = Organisation.find(params[:id])
-    @organisation = current_user.organisations.find(params[:id])
+    @organisation = current_user.organisations.friendly.find(params[:id])
     # authorize @organisation
     raise unless @organisation.user == current_user
 
@@ -47,7 +47,7 @@ class OrganisationsController < ApplicationController
   end
 
   def destroy
-    @organisation = Organisation.find(params[:id])
+    @organisation = Organisation.friendly.find(params[:id])
     raise unless @organisation.user == current_user
 
     @organisation.destroy
