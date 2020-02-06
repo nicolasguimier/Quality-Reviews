@@ -5,23 +5,23 @@
   <div class="d-flex flex-wrap justify-content-around">
     <% if @organisation.facebook_link.present? %>
       <%= link_to @facebook_link do %>
-        <%= image_tag "facebook-avis.jpeg" %>
+        <%= image_tag "facebook-avis.jpg" %>
       <% end %>
     <% end %>
     <% if @organisation.tripadvisor_link.present? %>
       <%= link_to @organisation.tripadvisor_link do %>
-        <%= image_tag "tripadvisor-avis.jpeg" %>
+        <%= image_tag "tripadvisor-avis.jpg" %>
       <% end %>
     <% end %>
     <% if @organisation.google_link.present? %>
       <% google_link = "https://search.google.com/local/writereview?placeid=" + @organisation.google_link %>
       <%= link_to google_link do %>
-        <%= image_tag "google-avis.jpeg" %>
+        <%= image_tag "google-avis.jpg" %>
       <% end %>
     <% end %>
     <% if @organisation.yelp_link.present? %>
       <%= link_to @organisation.yelp_link do %>
-        <%= image_tag "yelp-avis.jpeg" %>
+        <%= image_tag "yelp-avis.jpg" %>
       <% end %>
     <% end %>
   </div>
