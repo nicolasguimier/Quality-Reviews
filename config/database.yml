@@ -83,3 +83,4 @@ production:
   database: Quality-Reviews_production
   username: Quality-Reviews
   password: <%= ENV['QUALITY-REVIEWS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['POSTGRESQL_ADDON_URI'] %>
