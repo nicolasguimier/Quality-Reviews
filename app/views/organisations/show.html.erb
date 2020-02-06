@@ -1,9 +1,7 @@
 <div class="qr-card">
-  <h1><%= @organisation.name %></h1>
-  <div>
-    <p><%= @organisation.presentation %></p>
-  </div>
-  <h2>Let a review on your favorite plateform:</h2>
+  <h1></h1>
+  <h1>Let a review about "<i><%= @organisation.name %></i>"</h1>
+  <p>Select your favorite plateform and let a review:</p>
   <div class="d-flex flex-wrap justify-content-around">
     <% if @organisation.facebook_link.present? %>
       <%= link_to @facebook_link do %>

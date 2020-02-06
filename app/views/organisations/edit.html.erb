@@ -5,7 +5,6 @@
         <p class="text-danger"><%= @organisation.errors[:organisation].first  %></p>
       <% end %>
       <%= f.input :name, required: true, as: :string, label:"Name" %>
-      <%= f.input :presentation, required: true, as: :string, label:"Presentation" %>
       <%= f.input :facebook_link, as: :string, label:"Facebook URL page" %>
       <%= f.input :google_link, as: :string, label:"Google Place ID" %>
       <%= f.input :yelp_link, as: :string, label:"Yelp URL page" %>
