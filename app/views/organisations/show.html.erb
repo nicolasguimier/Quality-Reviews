@@ -1,9 +1,9 @@
 <% content_for :meta_title, "#{@organisation.name} - Let a review" %>
 <% content_for :meta_description, "Easy way to let a review on social plateforms like Google, Facebook, Pinterest or Yelp for #{@organisation.name}" %>
 
-<div class="qr-card">
-  <h1>Let a review about "<i><%= @organisation.name %></i>"</h1>
-  <p>Select your favorite plateform and let a review:</p>
+<div class="qr-card text-center">
+  <h1><%= @organisation.name %></h1>
+  <p>Select your favorite plateform</p>
   <div class="d-flex flex-wrap justify-content-around">
     <% if @organisation.facebook_link.present? %>
       <%= link_to @facebook_link do %>
@@ -27,4 +27,7 @@
       <% end %>
     <% end %>
   </div>
+</div>
+<div class="text-center mt-1">
+  Powered by <a href="/">Quality Reviews</a><%= image_tag "favicon/favicon-16x16.png" %>
 </div>
