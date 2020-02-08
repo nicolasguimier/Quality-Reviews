@@ -1,0 +1,19 @@
+<%= simple_form_for @contact do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.input :name, label: false, placeholder:"Name" %>
+  <%= f.input :email, label: false, placeholder:"Email" %>
+  <%= f.input :phone, as: :email, label: false, placeholder:"Phone" %>
+  <%= f.input :message, as: :text, label: false, placeholder: "Your message" %>
+  <%#= f.input :nickname, :hint => 'Leave this field blank!' %>
+  <%= f.button :submit, "Contact us", class: "btn-primary" %>
+<% end %>
