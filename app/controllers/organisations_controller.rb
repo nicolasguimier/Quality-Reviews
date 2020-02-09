@@ -7,9 +7,12 @@ class OrganisationsController < ApplicationController
 
   def show
     @organisation = Organisation.friendly.find(params[:id])
-    if @organisation.facebook_link.present?
-      @facebook_link = convert_facebook_link(@organisation.facebook_link)
-    end
+
+    @links = {}
+    @links[:tripadvisor] = @organisation.tripadvisor_link if @organisation.tripadvisor_link.present?
+    @links[:facebook] = convert_facebook_link(@organisation.facebook_link) if @organisation.facebook_link.present?
+    @links[:google] = convert_google_link(@organisation.google_link) if @organisation.google_link.present?
+    @links[:yelp] = @organisation.yelp_link if @organisation.yelp_link.present?
 
     render layout: 'organisation'
   end
@@ -60,10 +63,13 @@ class OrganisationsController < ApplicationController
     params.require(:organisation).permit(:name, :presentation, :facebook_link, :tripadvisor_link, :google_link, :yelp_link)
   end
 
+  def convert_google_link(g_link)
+    return "https://search.google.com/local/writereview?placeid=" + g_link
+  end
+
   def convert_facebook_link(bf_link)
     bf_link.gsub! ':', '%3A'
     bf_link.gsub! '/', '%2F'
-    new_link = "https://www.facebook.com/login/?next=" + bf_link
-    return new_link
+    return "https://www.facebook.com/login/?next=" + bf_link
   end
 end

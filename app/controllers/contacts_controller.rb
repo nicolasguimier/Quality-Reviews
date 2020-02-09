@@ -6,7 +6,6 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(message_params)
     if @contact.valid?
-      binding.pry
       mailer3 = ActionMailer::Base.new
       mailer3.mail(from: 'sender@example.com', to: 'recipient@example.com', subject: 'test', body: "Hello, you've got mail!").deliver
       # raise

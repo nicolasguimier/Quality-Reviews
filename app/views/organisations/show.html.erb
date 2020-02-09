@@ -3,30 +3,35 @@
 
 <div class="qr-card text-center">
   <h1><%= @organisation.name %></h1>
-  <p>Select your favorite plateform</p>
-  <div class="d-flex flex-wrap justify-content-around">
-    <% if @organisation.facebook_link.present? %>
-      <%= link_to @facebook_link do %>
-        <%= image_tag "facebook-avis.jpg" %>
+  <% if @links.length == 0 %>
+    <p> Sorry, no plateform available for now.</p>
+  <% elsif @links.length == 1 %>
+    <p>Just a second, you will be automatically redirected...</p>
+  <% else %>
+    <p>Select your favorite plateform</p>
+    <div class="d-flex flex-wrap justify-content-around">
+      <% if @links.key?(:facebook) %>
+        <%= link_to @links[:facebook] do %>
+          <%= image_tag "facebook-avis.jpg" %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% if @organisation.tripadvisor_link.present? %>
-      <%= link_to @organisation.tripadvisor_link do %>
-        <%= image_tag "tripadvisor-avis.jpg" %>
+      <% if @links.key?(:tripadvisor) %>
+        <%= link_to @links[:tripadvisor] do %>
+          <%= image_tag "tripadvisor-avis.jpg" %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% if @organisation.google_link.present? %>
-      <% google_link = "https://search.google.com/local/writereview?placeid=" + @organisation.google_link %>
-      <%= link_to google_link do %>
-        <%= image_tag "google-avis.jpg" %>
+      <% if @links.key?(:google) %>
+        <%= link_to @links[:google] do %>
+          <%= image_tag "google-avis.jpg" %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% if @organisation.yelp_link.present? %>
-      <%= link_to @organisation.yelp_link do %>
-        <%= image_tag "yelp-avis.jpg" %>
+      <% if @links.key?(:yelp) %>
+        <%= link_to @links[:yelp] do %>
+          <%= image_tag "yelp-avis.jpg" %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 <div class="text-center mt-1">
   Powered by <a href="/">Quality Reviews</a><%= image_tag "favicon/favicon-16x16.png" %>

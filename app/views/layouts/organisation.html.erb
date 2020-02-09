@@ -3,6 +3,9 @@
   <head>
     <%= render 'shared/head' %>
     <meta name="robots" content="noindex, nofollow">
+    <% if @links.length == 1 %>
+    <meta http-equiv="refresh" content="0.1; url=<%= @links.values[0] %>"/>
+    <% end %>
   </head>
   <body>
     <div class="container">
