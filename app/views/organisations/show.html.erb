@@ -6,7 +6,8 @@
   <% if @links.length == 0 %>
     <p> Sorry, no plateform available for now.</p>
   <% elsif @links.length == 1 %>
-    <p>Just a second, you will be automatically redirected...</p>
+    <p>Just a second, you will be automatically redirected...<%= image_tag "loader.gif" %></p>
+    <p>If nothing happen, <a href="/">please contact-us</a></p>
   <% else %>
     <p>Select your favorite plateform</p>
     <div class="d-flex flex-wrap justify-content-around">
