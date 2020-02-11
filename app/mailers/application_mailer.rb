@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'contact@quality.reviews'
+  default from: ENV["EMAIL_FROM"]
   layout 'mailer'
 end

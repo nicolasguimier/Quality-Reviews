@@ -16,6 +16,6 @@
 class ContactMailer < ApplicationMailer
   def general_message(contact)
     @contact = contact
-    mail(to: "nicolas.guimier@gmail.com", subject: "You Have a Message From Your Website")
+    mail(to: ENV["EMAIL_RECIPIENT"], subject: ENV["EMAIL_SUBJECT"])
   end
 end
