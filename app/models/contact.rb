@@ -5,5 +5,5 @@ class Contact #< ActiveRecord::Base
     with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
     message: "must be a valid email address"
   }
-  validates :name, :phone, :message, presence: true
+  validates :name, :message, presence: true
 end
