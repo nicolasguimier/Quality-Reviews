@@ -26,9 +26,11 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.new(organisation_params)
     @organisation.user = current_user
     # authorize @organisation
-    raise unless @organisation.save
-
-    redirect_to organisations_path
+    if @organisation.save
+      redirect_to organisations_path
+    else
+      render :new
+    end
   end
 
   def edit

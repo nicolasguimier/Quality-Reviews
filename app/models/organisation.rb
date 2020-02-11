@@ -1,8 +1,11 @@
 class Organisation < ApplicationRecord
+  extend FriendlyId
+
+  friendly_id :slug_candidates, use: :slugged
+
   belongs_to :user
 
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  validates :name, presence: true
 
   # in case of 2 same name, the module will genrate a slug with Organisation ID.
   def slug_candidates
